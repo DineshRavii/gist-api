@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gist-api-deployment
+  labels:
+    app: gist-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gist-api
+  template:
+    metadata:
+      labels:
+        app: gist-api
+    spec:
+      containers:
+      - name: gist-api
+        image: ghcr.io/dineshravii/gist-api:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: GITHUB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: github-token-secret
+                key: GITHUB_TOKEN
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
