@@ -47,5 +47,5 @@ jobs:
                     context: .
                     push: true
                     tags: |
-                        ghcr.io/${{ github.repository_owner }}/gist-api:latest
-                        ghcr.io/${{ github.repository_owner }}/gist-api:${{ github.sha }}
+                        ghcr.io/dineshravii/gist-api:latest
+                        ghcr.io/dineshravii/gist-api:${{ github.sha }}
