@@ -42,12 +42,14 @@ pipeline {
             }
         }
 
-        stage('deploy in k8s'){
-            steps{
-                sh '''
-                    kubectl set image deployment/gist-api gist-api=ghcr.io/dineshravii/gist-api:latest
-                '''
-            }
-        }
+        // stage('deploy in k8s') {
+        //     steps {
+        //             sh '''
+        //                 kubectl set image deployment/gist-api \
+        //                 gist-api=ghcr.io/dineshravii/gist-api:latest
+        //                 kubectl rollout status deployment/gist-api
+        //             '''
+        //          }
+        // }
     }
 }
