@@ -41,5 +41,13 @@ pipeline {
                 '''
             }
         }
+
+        stage('deploy in k8s'){
+            steps{
+                sh '''
+                    kubectl set image deployment/gist-api gist-api=ghcr.io/dineshravii/gist-api:latest
+                '''
+            }
+        }
     }
 }
