@@ -2,6 +2,8 @@ import logging
 import os
 import requests
 from flask import Flask, jsonify
+from prometheus_flask_exporter import PrometheusMetrics
+
 
 # Configure logging
 logging.basicConfig(
@@ -11,6 +13,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
 
 @app.route('/health')
 def health():
